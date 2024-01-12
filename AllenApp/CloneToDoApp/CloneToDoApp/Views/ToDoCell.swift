@@ -16,6 +16,13 @@ class ToDoCell: UITableViewCell {
     @IBOutlet weak var dateTextLabel: UILabel!
     @IBOutlet weak var updateButton: UIButton!
     
+    var toDoData: ToDoData? {
+        didSet {
+            configureUIwithData()
+        }
+    }
+    
+    
     // ToDoData를 전달받을 변수
     var toDoData: MemoData? {
         didSet {
@@ -35,7 +42,22 @@ class ToDoCell: UITableViewCell {
         configureUI()
     }
 
-    func configureUI
+    func configureUI() {
+        backView.clipsToBounds = true
+        backView.layer.cornerRadius = 8
+        
+        updateButton.clipsToBounds = true
+        updateButton.layer.cornerRadius = 10
+    }
+    
+    func configureUIwithData(){
+        toDoTextLabel.text = toDoData?.memoText
+        dateTextLabel.text = toDoData?.dateString
+        guard let colorNum = toDoData?.color else { return }
+        let color = MyColor(rawValue: colorNum) ?? .red
+        updateButton.backgroundColor = color.buttonColor
+        backView.backgroundColor = color.backgoundColor
+    }
     
     
     

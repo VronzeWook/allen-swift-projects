@@ -23,7 +23,10 @@ final class CoreDataManager {
     lazy var context = appDelegate?.persistentContainer.viewContext
     
     
-    
+func getToDoListFromCoreData() -> [ToDoData] {
+        var toDoList: [ToDoData] = []
+        return  toDoList
+    }
     
     
     

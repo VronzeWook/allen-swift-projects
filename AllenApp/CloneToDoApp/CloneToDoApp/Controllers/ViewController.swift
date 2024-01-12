@@ -19,8 +19,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNaviBar()
-        
-        
+        setupTableView()
     }
     
     // 화면이 나타날 때마다 테이블뷰 리로드
@@ -47,32 +46,25 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorStyle = .none // 분리 스타일
     }
-    
-    
-    
-    
-    
-    
-    
+
     
     @objc func plusButtonTapped() {
-        
+        performSegue(withIdentifier: "ToDoCell", sender: nil)
     }
 
 }
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return toDoManager.getToDoListFromCoreData().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCell", for: indexPath) as! ToDoCell
+        let toDoData = toDoManager.getToDoListFromCoreData()
         
-        // let toDoData = toDoManager.getToDoListFromCoreData()
-        // cell.toDoData = toDodata[indexPath.row]
         
-        // cell.updateButtonPressed = { [weak self] (senderCell
+        
         return cell
     }
 
